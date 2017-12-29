@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 
@@ -38,6 +38,27 @@ class DentistsCareer(Base):
         return "{self.dentist_name}, {self.dentist_alt_career}"
 
 
+class EnglandDentalClinics(Base):
+    __tablename__ = 'englanddentalclinics'
+
+    dc_id = Column(Integer(), primary_key=True)
+    dc_file_id = Column(String(30))
+    dc_name = Column(String(100))
+    dc_address_line_1 = Column(String(50))
+    dc_address_line_2 = Column(String(20), nullable=True)
+    dc_address_line_3 = Column(String(20), nullable=True)
+    dc_address_line_4 = Column(String(20), nullable=True)
+    dc_address_line_5 = Column(String(20), nullable=True)
+    dc_address_line_full = Column(String(255), nullable=True)
+    dc_postcode = Column(String(20))
+    dc_latitude = Column(Float(), nullable=True)
+    dc_longitude = Column(Float(), nullable=True)
+    dc_status_code = Column(String(5))
+    dc_practice_type = Column(String(5))
+
+
+
+
 # Create an engine that stores data in the local directory's dentists.db file
-engine = create_engine('sqlite:///dentists.db')
+engine = create_engine('sqlite:///sqlite_db/dentists.db')
 Base.metadata.create_all(engine)

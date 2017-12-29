@@ -1,6 +1,4 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
-# import pandas as pd
-import datetime
 
 
 wikidata_endpoint = "https://query.wikidata.org/sparql"
@@ -24,7 +22,6 @@ FILTER (SUBSTR(str(?sitelink), 1, 25) = "https://en.wikipedia.org/").
 FILTER ( ?DateOfBirth>= "1600-01-01T00:00:00Z"^^xsd:dateTime).
 BIND (COALESCE(?image,"unknown") AS ?image).
 BIND (COALESCE(?CitizenCountryLabel,"unknown") AS ?CitizenCountryLabel).
-BIND (COALESCE(?SexGenderLabel ,"unknown") AS ?SexGenderLabel).
 }
 ORDER BY ?Dentists
 LIMIT 1000

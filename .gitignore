@@ -30,7 +30,7 @@ MANIFEST
 # Jupyter Notebook
 .ipynb_checkpoints
 
-
-
 /queries_dir/
-/tweet_dental.py
+/tweet/tweet_dental.py
+.idea/
+/mapping/google_map_api.py
