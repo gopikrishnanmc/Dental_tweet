@@ -9,44 +9,45 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
-class FemaleDentists(TweetFacts):
-
+class DentistOfTheDay(TweetFacts):
     def __init__(self):
         super().__init__()
-        self.hashtag_main = '#WomenInDentistry' + ' '
+        self.hashtag_main = '#Dentists from #Wikipedia.' + ' '
 
     def query_and_tweet_build(self):
-        self.dentist = session.query(WikiDentist).filter_by(dentist_sex='female').order_by(WikiDentist.number_of_tweets).first()
+        self.dentist = session.query(WikiDentist).order_by(WikiDentist.number_of_tweets).first()
         if self.dentist.dentist_image == 'unknown' and self.dentist.dentist_country_citizen == 'unknown':
-            tweet_text = '{}, born: {}, Wiki-{},'. \
+            tweet_text = '{}, born: {}, sex/gender-{}, Wiki-{},'. \
                 format(self.dentist.dentist_name,
                        self.dentist.dentist_date_of_birth.split('T')[0],
+                       self.dentist.dentist_sex,
                        self.dentist.dentist_wiki_site_link
                        )
         elif self.dentist.dentist_country_citizen == 'unknown':
-            tweet_text = '{}, born: {}, Wiki-{}, Image-{},'. \
+            tweet_text = '{}, born: {}, sex/gender-{}, Wiki-{}, Image-{},'. \
                 format(self.dentist.dentist_name,
                        self.dentist.dentist_date_of_birth.split('T')[0],
+                       self.dentist.dentist_sex,
                        self.dentist.dentist_wiki_site_link,
                        self.dentist.dentist_image
                        )
         elif self.dentist.dentist_image == 'unknown':
-            tweet_text = '{}, born: {}, Wiki-{}, Citizen of-{},'. \
+            tweet_text = '{}, born: {}, sex/gender-{}, Wiki-{}, Citizen of-{},'. \
                 format(self.dentist.dentist_name,
                        self.dentist.dentist_date_of_birth.split('T')[0],
+                       self.dentist.dentist_sex,
                        self.dentist.dentist_wiki_site_link,
                        self.dentist.dentist_country_citizen
                        )
         else:
-            tweet_text = '{}, born: {}, Wiki-{}, Image-{}, Citizen of-{},'. \
+            tweet_text = '{}, born: {}, sex/gender-{}, Wiki-{}, Image-{}, Citizen of-{},'. \
                 format(self.dentist.dentist_name,
                        self.dentist.dentist_date_of_birth.split('T')[0],
+                       self.dentist.dentist_sex,
                        self.dentist.dentist_wiki_site_link,
                        self.dentist.dentist_image,
                        self.dentist.dentist_country_citizen
                        )
         tweet_text = self.hashtag_main + tweet_text + self.hashtag_other
         return tweet_text, self.dentist.dentist_id
-
-
 

@@ -1,10 +1,15 @@
-from tweet.TweetFacts import FemaleDentists, DentistOfTheDay, DentistAltCareers
+from tweet.TweetFemaleDentists import FemaleDentists
+from tweet.DentistOfTheDay import DentistOfTheDay
+from tweet.DentistAltCareers import DentistAltCareers
+from tweet.TweetFacts import TweetDentalGraphs
 import time
 
 if __name__ == '__main__':
     fd = FemaleDentists()
     dod = DentistOfTheDay()
     dac = DentistAltCareers()
+
+    tg = TweetDentalGraphs
 
     # Daily Tweets
     fd.tweet_fact()  # #WomenInDentistry
